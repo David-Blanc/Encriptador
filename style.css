@@ -140,6 +140,7 @@ body section {
     margin: 2rem;
     border-radius: 1rem;
     height: 3rem;
+    min-height: 2.5rem;
     display: none;
     color: #0A3871;
     border: 1px solid #0A3871;
@@ -186,6 +187,10 @@ body section {
 
     .output div img {
         display: none;
+    }
+
+    .alerta{
+        margin-top: 1rem;
     }
 }
 
