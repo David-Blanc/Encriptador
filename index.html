@@ -1,50 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Encriptador</title>
-        <link rel="stylesheet" href="reset.css">
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    </head>
 
-    <body>
-        <section>
-            <div class="input">
-                
-                <div class="logo">
-                    <img src="imagenes/Logo.svg" alt="logo">
-                </div>
-        
-                <div>
-                    <textarea cols="70" rows="10" id="mensaje" class="input-texto"  required placeholder="Ingrese el texto aquí"></textarea>
-                    <label for="mensaje"><img class="exclamacion" src="imagenes/Exclamacion.svg" alt="!"> Sólo letras minúsculas y sin tilde</label>
-        
-                    <fieldset>
-                        <input type="submit" value="Encriptar" class="encriptar">
-                        <input type="submit" value="Desencriptar" class="desencriptar">
-                    </fieldset>
-        
-        
-        
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Encriptador</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section>
+        <div class="input">
+            <div class="logo">
+                <img src="imagenes/Logo.svg" alt="logo">
             </div>
-            
-            <div class="output">
-                <div>
-                    <img src="imagenes/Muñeco.svg" alt="Muñeco">
-                    <h1 class="alerta">Ningún mensaje fue encontrado<h1>
-                    <p>Ingrese el texto que desees encriptar o desencriptar.</p>
-                </div>
-                
+
+            <div>
+                <textarea cols="70" rows="10" id="mensaje" class="input-texto" required
+                    placeholder="Ingrese el texto aquí"></textarea>
+                <label for="mensaje"><img class="exclamacion" src="imagenes/Exclamacion.svg" alt="!"> Sólo letras
+                    minúsculas y sin tilde</label>
+
+                <fieldset>
+                    <input type="submit" value="Encriptar" class="encriptar">
+                    <input type="submit" value="Desencriptar" class="desencriptar">
+                </fieldset>
             </div>
-        </section>
+        </div>
 
-            
+        <div id="output" class="output">
+            <div>
+                <img id="munheco" src="imagenes/Muñeco.svg" alt="Muñeco">
+                <h1 id="alerta" class="alerta">Ningún mensaje fue encontrado<h1>
+                <p id="textoEncriptado">Ingrese el texto que desees encriptar o desencriptar.</p>
+            </div>
+        </div>
+    </section>
 
+</body>
 
-    </body>
 </html>
+
+<script>
+    function encriptar() {
+        if (texto.value == "") {
+            alert("Ingrese un texto");
+        } else {
+            var textoEncriptado = "";
+            for (let i = 0; i < texto.value.length; i++) {
+                switch (texto.value.substring(i, i + 1)) {
+                    case "a":
+                        textoEncriptado += "ai";
+                        break;
+                    case "e":
+                        textoEncriptado += "enter";
+                        break;
+                    case "i":
+                        textoEncriptado += "imes";
+                        break;
+                    case "o":
+                        textoEncriptado += "ober";
+                        break;
+                    case "u":
+                        textoEncriptado += "ufat";
+                        break;
+                    default:
+                        textoEncriptado += texto.value.substring(i, i + 1);
+                        break;
+                }
+            }
+            document.getElementById('textoEncriptado').innerHTML = textoEncriptado;
+            document.getElementById('textoEncriptado').style.textAlign = 'left';
+            document.getElementById('output').style.alignItems = 'flex-start';
+            document.getElementById('munheco').style.display = 'none';
+            document.getElementById('alerta').style.display = 'none';
+        }
+
+    }
+
+    var botonEncriptar = document.querySelector(".encriptar");
+    botonEncriptar.onclick = encriptar;
+
+    var texto = document.querySelector("textarea");
+
+
+</script>
