@@ -72,7 +72,7 @@ body section {
     transform: scale(1.02);
 }
 
-.encriptar:active{
+.encriptar:active {
     transform: scale(1.00);
 }
 
@@ -90,7 +90,7 @@ body section {
     transform: scale(1.02);
 }
 
-.desencriptar:active{
+.desencriptar:active {
     transform: scale(1.00);
 }
 
@@ -113,7 +113,7 @@ body section {
     text-align: center;
 }
 
-.output div img{
+.output div img {
     width: 100%;
     margin-top: 25%;
 }
@@ -121,11 +121,17 @@ body section {
 .alerta {
     font-weight: 700;
     font-size: 1.15rem;
-    margin: 0 2rem 1rem 2rem;
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
 }
 
 .output div p {
-    margin: 1.5rem;
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
+    overflow: auto;
+}
+
+.output div p::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0px;
 }
 
 .output div p::moz-selection {
@@ -136,8 +142,8 @@ body section {
     background-color: #E9ECF8;
 }
 
-.copiar{
-    margin: 2rem;
+.copiar {
+    margin: 0 1.5rem 1.5rem 1.5rem;
     border-radius: 1rem;
     height: 3rem;
     min-height: 2.5rem;
@@ -147,17 +153,17 @@ body section {
     border-radius: 24px;
 }
 
-.copiar:hover{
+.copiar:hover {
     cursor: pointer;
     opacity: 0.8;
     transform: scale(1.02);
 }
 
-.copiar:active{
+.copiar:active {
     transform: scale(1.00);
 }
 
-@media screen and (max-width:860px) {
+@media screen and (max-width:960px) {
     body section {
         flex-direction: column;
 
@@ -188,13 +194,9 @@ body section {
     .output div img {
         display: none;
     }
-
-    .alerta{
-        margin-top: 1rem;
-    }
 }
 
-@media screen and (max-width:420px) {
+@media screen and (max-:420px) {
     .input div fieldset {
         flex-direction: column;
         height: 30%;
@@ -210,4 +212,11 @@ body section {
         height: 45%;
     }
 
+    .textoEncriptado {
+        max-height: 5rem;
+    }
+
+    .output div p {
+        max-height: 5rem;
+    }
 }
