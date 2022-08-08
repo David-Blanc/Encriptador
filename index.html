@@ -38,6 +38,7 @@
                 <h1 id="alerta" class="alerta">Ningún mensaje fue encontrado<h1>
                         <p id="textoEncriptado">Ingrese el texto que desees encriptar o desencriptar.</p>
             </div>
+            <input type="submit" value="Copiar" id="copiar" class="copiar">
         </div>
     </section>
 
@@ -46,27 +47,29 @@
 </html>
 
 <script>
+
     function mostrarTexto() {
         document.getElementById('textoEncriptado').style.textAlign = 'left';
-        document.getElementById('output').style.alignItems = 'flex-start';
         document.getElementById('munheco').style.display = 'none';
         document.getElementById('alerta').style.display = 'none';
+        document.getElementById('copiar').style.display = 'block';
     }
+
     function comprobarTexto(i) {
         var j = i.toLowerCase();
         if (j == "á" || j == "é" || j == "í" || j == "ó" || j == "ú" || i != j) {
-            alert("Sin mayúsculas ni tildes por favor");
+            alert("Sin tildes ni mayúsculas por favor");
             return false;
         }
         return true;
     }
-    var textoEncriptado;
+
     function encriptar() {
         var j = true;
+        textoEncriptado = "";
         if (texto.value == "") {
             alert("Ingrese un texto");
         } else {
-            textoEncriptado = "";
             for (let i = 0; i < texto.value.length; i++) {
                 if (comprobarTexto(texto.value.substring(i, i + 1))) {
                     switch (texto.value.substring(i, i + 1)) {
@@ -100,32 +103,32 @@
             }
         }
     }
-    var textoDesencriptado;
+
     function desencriptar() {
         var j = true;
+        textoEncriptado = "";
         if (texto.value == "") {
             alert("Ingrese un texto");
         } else {
-            textoDesencriptado = "";
             for (let i = 0; i < texto.value.length; i++) {
                 if (comprobarTexto(texto.value.substring(i, i + 1))) {
                     if (texto.value.substring(i, i + 2) == "ai") {
-                        textoDesencriptado += "a";
+                        textoEncriptado += "a";
                         i = i + 1;
                     } else if (texto.value.substring(i, i + 5) == "enter") {
-                        textoDesencriptado += "e";
+                        textoEncriptado += "e";
                         i = i + 4;
                     } else if (texto.value.substring(i, i + 4) == "imes") {
-                        textoDesencriptado += "i";
+                        textoEncriptado += "i";
                         i = i + 3;
                     } else if (texto.value.substring(i, i + 4) == "ober") {
-                        textoDesencriptado += "o";
+                        textoEncriptado += "o";
                         i = i + 3;
                     } else if (texto.value.substring(i, i + 4) == "ufat") {
-                        textoDesencriptado += "u";
+                        textoEncriptado += "u";
                         i = i + 3;
                     } else {
-                        textoDesencriptado += texto.value.substring(i, i + 1);
+                        textoEncriptado += texto.value.substring(i, i + 1);
                     }
                 } else {
                     j = false;
@@ -133,11 +136,36 @@
                 }
             }
             if (j) {
-                document.getElementById('textoEncriptado').innerHTML = textoDesencriptado;
+                document.getElementById('textoEncriptado').innerHTML = textoEncriptado;
                 mostrarTexto();
             }
         }
     }
+
+    function seleccionaTexto(element) {
+        var doc = document,
+            text = doc.getElementById(element),
+            range,
+            selection;
+        if (doc.body.createTextRange) { //ms
+            range = doc.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) { //all others
+            selection = window.getSelection();
+            range = doc.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+
+    function copiarTexto() {
+        seleccionaTexto('textoEncriptado');
+        document.execCommand('copy');
+    }
+
+    var textoEncriptado;
 
     var botonEncriptar = document.querySelector(".encriptar");
     botonEncriptar.onclick = encriptar;
@@ -146,6 +174,9 @@
     botonDesencriptar.onclick = desencriptar;
 
     var texto = document.querySelector("textarea");
+
+    var botonCopiar = document.querySelector(".copiar");
+    botonCopiar.onclick = copiarTexto;
 
 
 </script>
